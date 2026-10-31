@@ -29,9 +29,9 @@ const Navbar = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
   console.log(user);
-  const handleSignOut = async () => {
+  const handleSignOut = async() => {
     await authClient.signOut();
-  };
+  }
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#ead9ca] bg-[#fffaf2]/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
@@ -62,47 +62,45 @@ const Navbar = () => {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden items-center gap-3 lg:flex">
-          {user ? (
-            <Popover>
-              <PopoverTrigger
-                render={
-                  <button>
-                    <Avatar>
-                      <AvatarImage
-                        referrerPolicy="no-referrer"
-                        src={user?.image as string}
-                      />
-                      <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
-                    </Avatar>
-                  </button>
-                }
-              ></PopoverTrigger>
-              <PopoverContent>
-                <PopoverHeader>
-                  <PopoverTitle className="text-xl font-bold my-2">
-                    {user?.name}
-                  </PopoverTitle>
-                  <Button className="my-2">My Profile</Button>
-                  <Button onClick={handleSignOut} variant={"destructive"}>
-                    Logout
-                  </Button>
-                </PopoverHeader>
-              </PopoverContent>
-            </Popover>
-          ) : (
-            <>
-              <Button
-                variant="outline"
-                className="border-[#783528] bg-transparent px-5 text-[#783528] hover:bg-[#783528] hover:text-white"
-              >
-                <Link href="/sign-up">Sign Up</Link>
-              </Button>
 
-              <Button className="bg-[#783528] px-5 text-white hover:bg-[#5c251d]">
-                <Link href="/sign-in">Sign In</Link>
-              </Button>
-            </>
-          )}
+          {
+            user ? <Popover>
+            <PopoverTrigger
+              render={
+                <button>
+                  <Avatar>
+                    <AvatarImage
+                      referrerPolicy="no-referrer"
+                      src={user?.image as string}
+                    />
+                    <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                </button>
+              }
+            ></PopoverTrigger>
+            <PopoverContent>
+              <PopoverHeader>
+                <PopoverTitle className="text-xl font-bold my-2">
+                  {user?.name}
+                </PopoverTitle>
+                <Button className="my-2">My Profile</Button>
+                <Button onClick={handleSignOut} variant={"destructive"}>Logout</Button>
+              </PopoverHeader>
+            </PopoverContent>
+          </Popover> : 
+          <>
+            <Button
+            variant="outline"
+            className="border-[#783528] bg-transparent px-5 text-[#783528] hover:bg-[#783528] hover:text-white"
+          >
+            <Link href="/sign-up">Sign Up</Link>
+          </Button>
+
+          <Button className="bg-[#783528] px-5 text-white hover:bg-[#5c251d]">
+            <Link href="/sign-in">Sign In</Link>
+          </Button>
+          </>
+          }      
         </div>
 
         {/* Mobile Navigation */}
@@ -173,9 +171,7 @@ const Navbar = () => {
                           {user?.name}
                         </PopoverTitle>
                         <Button className="my-2">My Profile</Button>
-                        <Button onClick={handleSignOut} variant={"destructive"}>
-                          Logout
-                        </Button>
+                        <Button onClick={handleSignOut} variant={"destructive"}>Logout</Button>
                       </PopoverHeader>
                     </PopoverContent>
                   </Popover>
