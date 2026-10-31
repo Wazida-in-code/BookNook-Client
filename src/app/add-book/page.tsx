@@ -19,6 +19,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { Textarea } from "@/components/ui/textarea";
+import { authClient } from "@/lib/auth-client";
+import { toast } from "@/components/ui/toast";
 
 const CATEGORIES = [
   "Mystery & Thriller",
@@ -42,6 +44,9 @@ const fieldClass =
 const labelClass = "text-sm font-medium text-[#7b2d1f]";
 
 const AddBookPage = () => {
+  const { data: session } = authClient.useSession();
+    const user = session?.user;
+    console.log(user);
   const handleSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
     e.preventDefault();
     const formData = new FormData(e.target);
@@ -55,7 +60,20 @@ const AddBookPage = () => {
         body: JSON.stringify(bookData)
     })
     const result = await res.json();
-    console.log(result);
+
+    if (result){
+      toast.add({
+        title: "Book Added Successfully!",
+        type: "success",
+      });
+    }
+
+    if (!result){
+      toast.add({
+        title: "Something went wrong!",
+        type: "error",
+      });
+    }
   };
 
   return (
@@ -75,7 +93,6 @@ const AddBookPage = () => {
 
         <CardContent className="pt-6">
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Title + Author */}
             <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="title" className={labelClass}>
@@ -102,7 +119,6 @@ const AddBookPage = () => {
               </div>
             </div>
 
-            {/* Category */}
             <div className="space-y-2">
               <Label htmlFor="category" className={labelClass}>
                 Category
@@ -127,7 +143,6 @@ const AddBookPage = () => {
               </select>
             </div>
 
-            {/* Image upload */}
             <div className="space-y-2">
               <Label htmlFor="image-url" className={labelClass}>
                 Image URL
@@ -141,7 +156,6 @@ const AddBookPage = () => {
               />
             </div>
 
-            {/* Description */}
             <div className="space-y-2">
               <Label htmlFor="description" className={labelClass}>
                 Short description
@@ -155,7 +169,6 @@ const AddBookPage = () => {
               />
             </div>
 
-            {/* Read-only user info */}
             <div className="grid gap-6 rounded-xl border border-[#ecdfd0] bg-[#fdf8f1] p-4 md:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="userName" className={labelClass}>
@@ -166,7 +179,7 @@ const AddBookPage = () => {
                   <Input
                     id="userName"
                     name="userName"
-                    value={loggedInUser.name}
+                    value={user?.name || ""}
                     readOnly
                     className={`${fieldClass} cursor-not-allowed bg-[#f4ebdf] pl-9`}
                   />
@@ -183,7 +196,7 @@ const AddBookPage = () => {
                     id="userEmail"
                     name="userEmail"
                     type="email"
-                    value={loggedInUser.email}
+                    value={user?.email || ""}
                     readOnly
                     className={`${fieldClass} cursor-not-allowed bg-[#f4ebdf] pl-9`}
                   />
