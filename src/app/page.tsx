@@ -1,9 +1,10 @@
+import Navbar from "@/components/homePage/Navbar";
 
 
 export default function Home() {
   return (
     <div>
-      Project is started...
+      <Navbar />
     </div>
   );
 }
