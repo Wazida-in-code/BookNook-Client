@@ -5,7 +5,7 @@ import Link from "next/link";
 import { Eye, EyeOff, Mail, Lock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
-import { signIn } from "@/lib/auth-client";
+import { authClient, signIn } from "@/lib/auth-client";
 import { redirect } from "next/navigation";
 import { toast } from "@/components/ui/toast";
 
@@ -34,6 +34,13 @@ export default function LoginPage() {
         })
         }
   }
+
+  const handleGoogleSignIn = async () => {
+      const data = await authClient.signIn.social({
+        provider: "google",
+      });
+    };
+
   return (
     <div className="min-h-screen flex items-center justify-center bg-white px-4 py-12">
       <div className="w-full max-w-md rounded-2xl bg-[#F8F5F0] p-8 shadow-xl sm:p-10">
@@ -95,9 +102,7 @@ export default function LoginPage() {
         <Button
           type="button" variant="outline"
           className="h-12 w-full gap-3 border-[#E8DDD3] text-[#49352B] hover:bg-[#FAF7F2]"
-          onClick={() => {
-            // Add Google authentication here 
-            }}>
+          onClick={handleGoogleSignIn}>
           <FcGoogle size={20} /> Continue with Google </Button>
 
         <p className="mt-7 text-center text-sm text-gray-500">
