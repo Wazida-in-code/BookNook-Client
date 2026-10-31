@@ -50,11 +50,11 @@ const Navbar = () => {
             variant="outline"
             className="border-[#783528] bg-transparent px-5 text-[#783528] hover:bg-[#783528] hover:text-white"
           >
-            <Link href="/signup">Sign Up</Link>
+            <Link href="/sign-up">Sign Up</Link>
           </Button>
 
           <Button className="bg-[#783528] px-5 text-white hover:bg-[#5c251d]">
-            <Link href="/signin">Sign In</Link>
+            <Link href="/sign-in">Sign In</Link>
           </Button>
         </div>
 
@@ -108,11 +108,11 @@ const Navbar = () => {
                     variant="outline"
                     className="w-full border-[#783528] text-[#783528] hover:bg-[#783528] hover:text-white"
                   >
-                    <Link href="/signup">Sign Up</Link>
+                    <Link href="/sign-up">Sign Up</Link>
                   </Button>
 
                   <Button className="w-full bg-[#783528] text-white hover:bg-[#5c251d]">
-                    <Link href="/signin">Sign In</Link>
+                    <Link href="/sign-in">Sign In</Link>
                   </Button>
                 </div>
               </div>
