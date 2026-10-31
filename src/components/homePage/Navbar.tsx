@@ -3,9 +3,19 @@
 import Image from "next/image";
 import Link from "next/link";
 import { Menu } from "lucide-react";
-
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { authClient } from "@/lib/auth-client";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverDescription,
+  PopoverHeader,
+  PopoverTitle,
+  PopoverTrigger,
+} from "@/components/ui/popover";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -16,6 +26,9 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const { data: session } = authClient.useSession();
+  const user = session?.user;
+  console.log(user);
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#ead9ca] bg-[#fffaf2]/95 backdrop-blur-md">
       <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-5 md:px-8">
@@ -46,6 +59,31 @@ const Navbar = () => {
 
         {/* Desktop Auth Buttons */}
         <div className="hidden items-center gap-3 lg:flex">
+          <Popover>
+            <PopoverTrigger
+              render={
+                <button>
+                  <Avatar>
+                    <AvatarImage
+                      referrerPolicy="no-referrer"
+                      src={user?.image as string}
+                    />
+                    <AvatarFallback>{user?.name.charAt(0)}</AvatarFallback>
+                  </Avatar>
+                </button>
+              }
+            ></PopoverTrigger>
+            <PopoverContent>
+              <PopoverHeader>
+                <PopoverTitle className="text-xl font-bold my-2">
+                  {user?.name}
+                </PopoverTitle>
+                <Button className="my-2">My Profile</Button>
+                <Button variant={"destructive"}>Logout</Button>
+              </PopoverHeader>
+            </PopoverContent>
+          </Popover>
+
           <Button
             variant="outline"
             className="border-[#783528] bg-transparent px-5 text-[#783528] hover:bg-[#783528] hover:text-white"
@@ -104,6 +142,32 @@ const Navbar = () => {
 
                 {/* Mobile Auth Buttons */}
                 <div className="mt-3 flex flex-col gap-3">
+                  <Popover>
+                    <PopoverTrigger
+                      render={
+                        <button>
+                          <Avatar>
+                            <AvatarImage
+                              referrerPolicy="no-referrer"
+                              src={user?.image as string}
+                            />
+                            <AvatarFallback>
+                              {user?.name.charAt(0)}
+                            </AvatarFallback>
+                          </Avatar>
+                        </button>
+                      }
+                    ></PopoverTrigger>
+                    <PopoverContent>
+                      <PopoverHeader>
+                        <PopoverTitle className="text-xl font-bold my-2">
+                          {user?.name}
+                        </PopoverTitle>
+                        <Button className="my-2">My Profile</Button>
+                        <Button variant={"destructive"}>Logout</Button>
+                      </PopoverHeader>
+                    </PopoverContent>
+                  </Popover>
                   <Button
                     variant="outline"
                     className="w-full border-[#783528] text-[#783528] hover:bg-[#783528] hover:text-white"
