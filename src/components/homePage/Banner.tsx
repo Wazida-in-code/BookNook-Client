@@ -1,7 +1,7 @@
 
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React, { useSyncExternalStore } from "react";
 import Link from "next/link";
 import Image from "next/image";
 
@@ -51,12 +51,20 @@ const books = [
   },
 ];
 
-const Banner = () => {
-  const [mounted, setMounted] = useState(false);
+// Swiper can only run in the browser, so we render it only after hydration.
+// `useSyncExternalStore` keeps the server and first client render identical
+// (both `false`) and then re-renders on the client — no hydration mismatch,
+// no setState-in-effect.
+const subscribeToMount = () => () => {};
+const getClientMountSnapshot = () => true;
+const getServerMountSnapshot = () => false;
 
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+const Banner = () => {
+  const mounted = useSyncExternalStore(
+    subscribeToMount,
+    getClientMountSnapshot,
+    getServerMountSnapshot
+  );
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-8 md:px-6">
