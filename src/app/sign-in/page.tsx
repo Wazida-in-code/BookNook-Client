@@ -22,13 +22,16 @@ export default function LoginPage() {
     
         if (data) {
             toast.add({
-            title: "You Have Been Successfully LoggedIn!",
+            title: "You Have Been Successfully Logged in!",
             type: "success"
         })
           redirect("/")
         }
         if (error) {
-          console.log(error);
+           toast.add({
+            title: "Something went wrong!",
+            type: "error"
+        })
         }
   }
   return (

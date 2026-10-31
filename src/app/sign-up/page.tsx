@@ -58,7 +58,10 @@ const SignUpPage = () => {
       redirect("/sign-in")
     }
     if (error) {
-      console.log(error);
+       toast.add({
+            title: "Something went wrong!",
+            type: "error"
+        })
     }
   };
   return (
