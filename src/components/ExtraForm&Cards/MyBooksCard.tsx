@@ -2,7 +2,8 @@ import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Pencil, Trash2, UserRound } from "lucide-react";
+import { Trash2, UserRound } from "lucide-react";
+import EditBook from "./EditBook";
 
 interface IBook {
   _id: string;
@@ -10,8 +11,11 @@ interface IBook {
   author: string;
   category: string;
   image: string;
+  description: string;
   userName: string;
+  userEmail: string;
 }
+
 
 const MyBooksCard = ({ book }: {book: IBook}) => {
   return (
@@ -64,15 +68,8 @@ const MyBooksCard = ({ book }: {book: IBook}) => {
           {/* Edit & Delete Buttons */}
           <div className="flex gap-2">
 
-            <Button
-              type="button"
-              size="sm"
-              className="h-8 flex-1 rounded-lg bg-[#6B4226] text-xs text-white hover:bg-[#4A2F22]"
-            >
-              <Pencil size={14} />
-              Edit
-            </Button>
-
+            
+              <EditBook book={book} />
             <Button
               type="button"
               size="sm"

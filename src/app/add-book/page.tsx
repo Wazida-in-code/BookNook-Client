@@ -32,10 +32,6 @@ const CATEGORIES = [
   "Self-Help",
   "Others",
 ];
-const loggedInUser = {
-  name: "Jane Reader",
-  email: "jane@example.com",
-};
 
 const fieldClass =
   "h-11 rounded-lg border-[#e6d8c9] bg-white text-[#5a2a20] placeholder:text-[#b39a8a] " +

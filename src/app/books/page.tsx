@@ -1,4 +1,4 @@
-import AllBooksCard from "@/components/AllBooksCard";
+import AllBooksCard from "@/components/ExtraForm&Cards/AllBooksCard";
 
 interface IBookAll {
   _id: string;

@@ -1,4 +1,4 @@
-import MyBooksCard from "@/components/MyBooksCard";
+import MyBooksCard from "@/components/ExtraForm&Cards/MyBooksCard";
 import { auth } from "@/lib/auth";
 import { BookOpen } from "lucide-react";
 import { headers } from "next/headers";
@@ -9,9 +9,10 @@ interface IBook {
   author: string;
   category: string;
   image: string;
+  description: string;
   userName: string;
+  userEmail: string;
 }
-
 
 const MyBooks = async () => {
   const session = await auth.api.getSession({
@@ -20,7 +21,7 @@ const MyBooks = async () => {
   const user = session?.user;
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/my-books/${user?.email}`,); //http://localhost:8000/my-books/omor@bin.com
   const books:IBook[] = await res.json();
-  console.log(books);
+
   return (
     <div className="min-h-screen bg-white px-5 py-16 md:px-10 lg:px-16">
       <div className="mx-auto max-w-7xl">
