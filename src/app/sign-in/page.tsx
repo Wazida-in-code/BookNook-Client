@@ -89,7 +89,7 @@ export default function LoginPage() {
           <button
             type="submit" className="w-full rounded-lg bg-[#6B422E] py-3 font-semibold text-white transition hover:bg-[#4A2C20]"> Login </button>
 
-             <Link href="/forgot-password" className="text-[15px] ml-19 lg:ml-30 text-[#8B5E46] hover:underline"> Forgot Password? </Link>
+             <p className="text-[15px] ml-19 lg:ml-30 text-[#8B5E46] hover:underline"> Forgot Password? </p>
 
         </form>
 
