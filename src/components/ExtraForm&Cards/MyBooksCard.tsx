@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Trash2, UserRound } from "lucide-react";
 import EditBook from "./EditBook";
+import DeleteBooks from "./DeleteBooks";
 
 interface IBook {
   _id: string;
@@ -67,19 +68,8 @@ const MyBooksCard = ({ book }: {book: IBook}) => {
 
           {/* Edit & Delete Buttons */}
           <div className="flex gap-2">
-
-            
               <EditBook book={book} />
-            <Button
-              type="button"
-              size="sm"
-              variant="outline"
-              className="h-8 flex-1 rounded-lg border-[#D9B8A0] text-xs text-[#A34F3B] hover:bg-[#F8EAE5] hover:text-[#8D3829]"
-            >
-              <Trash2 size={14} />
-              Delete
-            </Button>
-
+            <DeleteBooks book={book} />
           </div>
 
         </div>
