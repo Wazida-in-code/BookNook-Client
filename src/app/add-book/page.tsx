@@ -21,6 +21,7 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "@/components/ui/toast";
+import { redirect, useRouter } from "next/navigation";
 
 const CATEGORIES = [
   "Mystery & Thriller",
@@ -62,6 +63,7 @@ const AddBookPage = () => {
         title: "Book Added Successfully!",
         type: "success",
       });
+      redirect("/")
     }
 
     if (!result){
