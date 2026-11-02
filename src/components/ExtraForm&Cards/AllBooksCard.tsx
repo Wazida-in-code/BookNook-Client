@@ -35,13 +35,12 @@ const AllBooksCard = ({ book }: { book: IBook }) => {
         <p className="text-sm text-[#927B69]">
           By <span className="font-medium text-[#6B4226]">{book.author}</span>
         </p>
-
-          <Link
-            href={`/books/${book._id}`}
-            className="flex w-full items-center justify-center rounded-lg bg-[#6B4226] px-4 py-2 text-white transition-colors hover:bg-[#4A2F22]"
-          >
-            View Details
-          </Link>
+        <Link
+  href={`/books/${book._id}`}
+  className="relative z-10 flex h-11 w-full cursor-pointer items-center justify-center rounded-lg bg-[#6B4226] text-white transition-colors hover:bg-[#4A2F22]"
+>
+  View Details
+</Link>
       </CardContent>
     </Card>
   );

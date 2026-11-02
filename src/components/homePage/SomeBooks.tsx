@@ -44,7 +44,7 @@ const SomeBooks = async() => {
 
         <div className="mt-10 text-center">
           <Button
-            className="rounded-lg bg-[#6B4226] px-8 text-white hover:bg-[#4A2F22]"
+            className="relative z-10 cursor-pointer justify-center rounded-lg bg-[#6B4226] text-white transition-colors hover:bg-[#4A2F22]"
           >
             <Link href="/books">
               See All Books
