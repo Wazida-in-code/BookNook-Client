@@ -1,3 +1,4 @@
+import ReturnBtn from '@/components/Borrow-Books/ReturnBtn';
 import { auth } from '@/lib/auth';
 import { headers } from 'next/headers';
 import Image from 'next/image';
@@ -14,6 +15,7 @@ interface Book {
   borrowerEmail: string,
   borrowDate: string;
   returnDate: string
+  status: string;
 }
 
 const MyBorrowsPage = async() => {
@@ -78,12 +80,7 @@ const MyBorrowsPage = async() => {
                     </td>
 
                     <td className="px-6 py-4 text-center">
-                      <button
-                        type="button"
-                        className="rounded-lg bg-[#6B4226] px-4 py-2 text-sm font-medium text-white transition hover:bg-[#4A2F22]"
-                      >
-                        Return Book
-                      </button>
+                      <ReturnBtn book={book} />
                     </td>
 
                   </tr>

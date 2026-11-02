@@ -17,6 +17,7 @@ interface Book {
   description: string;
   userName: string;
   userEmail: string;
+  totalCopies: number;
 }
 
 const BookDetailsPage = async ({params}: {params: Promise<{ id: string }>}) => {
@@ -64,10 +65,14 @@ const BookDetailsPage = async ({params}: {params: Promise<{ id: string }>}) => {
             </div>
 
             <div className="space-y-3">
-              <h2 className="text-3xl font-bold leading-tight text-[#4A2F22] md:text-4xl">
-                {book.title}
-              </h2>
-
+              <div className="flex flex-wrap items-center gap-3 lg:gap-20">
+                <h1 className="text-3xl font-bold text-[#4A2F22] md:text-4xl">
+                  {book.title}
+                </h1>
+                <span className="rounded-full border border-[#e6d8c9] bg-[#f8f1e8] px-3 py-1.5 text-sm font-semibold text-[#7b2d1f]">
+                  {book.totalCopies} Copies Available
+                </span>
+              </div>
               <p className="text-base text-[#927B69]">
                 Written by{" "}
                 <span className="font-semibold text-[#6B4226]">

@@ -42,31 +42,39 @@ const labelClass = "text-sm font-medium text-[#7b2d1f]";
 
 const AddBookPage = () => {
   const { data: session } = authClient.useSession();
-    const user = session?.user;
-    console.log(user);
-  const handleSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const bookData = Object.fromEntries(formData.entries());
+  const user = session?.user;
 
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books`, {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const totalCopies = formData.get("totalCopies");
+    const bookData =  {
+  ...Object.fromEntries(formData.entries()),
+  totalCopies: Number(totalCopies),
+};
+    const res = await fetch(
+      `${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books`,
+      {
         method: "POST",
         headers: {
-            "Content-Type": "application/json",
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify(bookData)
-    })
+        body: JSON.stringify(bookData),
+      },
+    );
     const result = await res.json();
 
-    if (result){
+    console.log(bookData);
+
+    if (result) {
       toast.add({
         title: "Book Added Successfully!",
         type: "success",
       });
-      redirect("/")
+      redirect("/");
     }
 
-    if (!result){
+    if (!result) {
       toast.add({
         title: "Something went wrong!",
         type: "error",
@@ -117,28 +125,46 @@ const AddBookPage = () => {
               </div>
             </div>
 
-            <div className="space-y-2">
-              <Label htmlFor="category" className={labelClass}>
-                Category
-              </Label>
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+              <div className="space-y-2">
+                <Label htmlFor="category" className={labelClass}>
+                  Category
+                </Label>
 
-              <select
-                id="category"
-                name="category"
-                defaultValue=""
-                className={`${fieldClass} w-full`}
-                required
-              >
-                <option value="" disabled>
-                  Select a category
-                </option>
-
-                {CATEGORIES.map((c) => (
-                  <option key={c} value={c.toLowerCase()}>
-                    {c}
+                <select
+                  id="category"
+                  name="category"
+                  defaultValue=""
+                  className={`${fieldClass} w-full`}
+                  required
+                >
+                  <option value="" disabled>
+                    Select a category
                   </option>
-                ))}
-              </select>
+
+                  {CATEGORIES.map((c) => (
+                    <option key={c} value={c.toLowerCase()}>
+                      {c}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="space-y-2">
+                <Label htmlFor="totalCopies" className={labelClass}>
+                  Total Copies
+                </Label>
+
+                <Input
+                  id="totalCopies"
+                  name="totalCopies"
+                  type="number"
+                  min="0"
+                  placeholder="Enter total copies"
+                  className={fieldClass}
+                  required
+                />
+              </div>
             </div>
 
             <div className="space-y-2">
