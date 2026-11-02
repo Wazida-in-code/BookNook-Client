@@ -6,6 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { UserRound, Mail, BookOpen } from "lucide-react";
 import { notFound } from "next/navigation";
+import BorrowBtn from "@/components/Borrow-Books/BorrowBtn";
 
 interface Book {
   _id: string;
@@ -131,13 +132,7 @@ const BookDetailsPage = async ({params}: {params: Promise<{ id: string }>}) => {
               </CardContent>
             </Card>
 
-            <Button
-              type="button"
-              className="h-12 w-full rounded-xl bg-[#6B4226] text-base font-semibold text-white shadow-md shadow-[#6B4226]/10 transition-all duration-300 hover:bg-[#4A2F22] hover:shadow-lg"
-            >
-              Borrow This Book
-            </Button>
-
+            <BorrowBtn book={book} />
           </div>
         </div>
       </div>
