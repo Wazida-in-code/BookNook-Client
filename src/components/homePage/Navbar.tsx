@@ -85,7 +85,9 @@ const Navbar = () => {
                 <PopoverTitle className="text-xl font-bold my-2">
                   {user?.name}
                 </PopoverTitle>
-                <Button className="my-2">My Profile</Button>
+                <Button className="my-2">
+                          <Link href="/my-profile">My Profile</Link>
+                        </Button>
                 <Button onClick={handleSignOut} variant={"destructive"}>Logout</Button>
               </PopoverHeader>
             </PopoverContent>
@@ -172,7 +174,9 @@ const Navbar = () => {
                         <PopoverTitle className="text-xl font-bold my-2">
                           {user?.name}
                         </PopoverTitle>
-                        <Button className="my-2">My Profile</Button>
+                        <Button className="my-2">
+                          <Link href="/my-profile">My Profile</Link>
+                        </Button>
                         <Button onClick={handleSignOut} variant={"destructive"}>Logout</Button>
                       </PopoverHeader>
                     </PopoverContent>
