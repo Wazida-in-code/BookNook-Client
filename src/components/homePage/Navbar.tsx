@@ -16,6 +16,7 @@ import {
   PopoverTitle,
   PopoverTrigger,
 } from "@/components/ui/popover";
+import { useRouter } from "next/navigation";
 
 const navLinks = [
   { name: "Home", href: "/" },
@@ -26,10 +27,12 @@ const navLinks = [
 ];
 
 const Navbar = () => {
+  const router = useRouter()
   const { data: session } = authClient.useSession();
   const user = session?.user;
   const handleSignOut = async() => {
     await authClient.signOut();
+    router.refresh()
   }
   return (
     <header className="sticky top-0 z-50 w-full border-b border-[#ead9ca] bg-[#fffaf2]/95 backdrop-blur-md">

@@ -21,8 +21,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import { toast } from "../ui/toast";
+import { authClient } from "@/lib/auth-client";
 
 const BorrowBtn = ({ book }: { book: Book }) => {
+    const { data: session } = authClient.useSession();
+        const user = session?.user;
   const handleBorrowBook = async () => {
     const borrowDate = new Date();
 
@@ -31,6 +35,8 @@ const BorrowBtn = ({ book }: { book: Book }) => {
 
     const info = {
       ...book,
+      borrowerName: user?.name,
+      borrowerEmail: user?.email,
       borrowDate: borrowDate.toLocaleDateString("en-GB", {
         timeZone: "Asia/Dhaka",
       }),
@@ -38,7 +44,7 @@ const BorrowBtn = ({ book }: { book: Book }) => {
         timeZone: "Asia/Dhaka",
       }),
     };
-
+console.log(info, "Borrowed info");
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/borrows`,
       {
@@ -50,7 +56,13 @@ const BorrowBtn = ({ book }: { book: Book }) => {
       },
     );
     const data = await res.json();
-    console.log(data);
+
+    if (data) {
+      toast.add({
+        title: "Book Has Borrowed Successfully!",
+        type: "success",
+      });
+    }
   };
 
   return (

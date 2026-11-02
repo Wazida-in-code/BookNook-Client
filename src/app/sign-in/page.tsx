@@ -6,10 +6,11 @@ import { Eye, EyeOff, Mail, Lock, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { FcGoogle } from "react-icons/fc";
 import { authClient, signIn } from "@/lib/auth-client";
-import { redirect } from "next/navigation";
+import { redirect, useRouter } from "next/navigation";
 import { toast } from "@/components/ui/toast";
 
 export default function LoginPage() {
+  const router = useRouter()
   const [showPassword, setShowPassword] = useState(false);
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLFormElement>) => {
@@ -27,6 +28,7 @@ export default function LoginPage() {
         })
           redirect("/")
         }
+        router.refresh()
         if (error) {
            toast.add({
             title: "Something went wrong!",
