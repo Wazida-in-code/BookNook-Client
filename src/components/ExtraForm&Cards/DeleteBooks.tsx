@@ -37,9 +37,13 @@ const DeleteBooks = ({book}:{book:IBook}) => {
           authorization: `Bearer ${token}`
         },
         })
-        const data = await res.json();
-        console.log(data);
-        router.refresh()
+        // const data = await res.json();
+        if (!res.ok) {
+          console.log("Failed to delete book");
+          return;
+        }
+
+  router.refresh();
     }
 
   return (
