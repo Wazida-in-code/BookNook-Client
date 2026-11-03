@@ -154,7 +154,7 @@ const Navbar = () => {
 
                 {/* Mobile Auth Buttons */}
                 <div className="mt-3 flex flex-col gap-3">
-                  <Popover>
+                  { user ? <Popover>
                     <PopoverTrigger
                       render={
                         <button>
@@ -181,8 +181,9 @@ const Navbar = () => {
                         <Button onClick={handleSignOut} variant={"destructive"}>Logout</Button>
                       </PopoverHeader>
                     </PopoverContent>
-                  </Popover>
-                  <Button
+                  </Popover> : 
+                  <>
+                     <Button
                     variant="outline"
                     className="w-full border-[#783528] text-[#783528] hover:bg-[#783528] hover:text-white"
                   >
@@ -192,6 +193,7 @@ const Navbar = () => {
                   <Button className="w-full bg-[#783528] text-white hover:bg-[#5c251d]">
                     <Link href="/sign-in">Sign In</Link>
                   </Button>
+                  </>}
                 </div>
               </div>
             </SheetContent>

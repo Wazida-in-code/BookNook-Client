@@ -12,7 +12,7 @@ const Footer = () => {
           <div>
             <Link href="/" className="inline-block">
               <Image
-                src="/booknook-logo.png"
+                src="/BookNook-Logo.png"
                 alt="BookNook Logo"
                 width={200}
                 height={200}
