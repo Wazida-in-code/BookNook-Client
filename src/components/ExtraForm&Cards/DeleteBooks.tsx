@@ -14,6 +14,7 @@ import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { getTokenFromClient } from "@/lib/getTokenFromClient";
+import { toast } from "../ui/toast";
 
 interface IBook {
   _id: string;
@@ -38,12 +39,19 @@ const DeleteBooks = ({book}:{book:IBook}) => {
         },
         })
         // const data = await res.json();
-        if (!res.ok) {
-          console.log("Failed to delete book");
-          return;
-        }
+        if (res.ok) {
+          toast.add({
+          title: "Book Deleted Successfully!",
+          type: "success",
+});
 
-  router.refresh();
+          router.refresh();
+    } else {
+          toast.add({
+          title: "Something went wrong!",
+          type: "error",
+});
+}
     }
 
   return (
