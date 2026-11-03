@@ -37,6 +37,7 @@ const labelClass = "text-sm font-medium text-[#7b2d1f]";
 const AddBookForm = () => {
   const { data: session } = authClient.useSession();
   const user = session?.user;
+  
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();

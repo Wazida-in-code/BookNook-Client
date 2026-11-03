@@ -31,8 +31,7 @@ const MyBooks = async () => {
     headers: {
           authorization: `Bearer ${token}`
         },
-  }
-  ); //http://localhost:8000/my-books/omor@bin.com
+  });
   const books:IBook[] = await res.json();
 
   return (

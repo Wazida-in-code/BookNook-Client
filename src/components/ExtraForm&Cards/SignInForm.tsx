@@ -31,7 +31,6 @@ export default function SignInForm() {
             type: "success"
         })
       }
-
         if (error) {
            toast.add({
             title: "Something went wrong!",
