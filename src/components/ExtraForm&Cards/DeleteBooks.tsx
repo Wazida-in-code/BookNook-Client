@@ -13,6 +13,7 @@ import {
 import { Button } from "../ui/button";
 import { Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 interface IBook {
   _id: string;
@@ -29,8 +30,12 @@ interface IBook {
 const DeleteBooks = ({book}:{book:IBook}) => {
     const router = useRouter()
     const handleDeleteBook = async() =>{
+      const token = await getTokenFromClient()
         const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books/${book._id}`, {
-            method: "DELETE"
+            method: "DELETE",
+            headers: {
+          authorization: `Bearer ${token}`
+        },
         })
         const data = await res.json();
         console.log(data);

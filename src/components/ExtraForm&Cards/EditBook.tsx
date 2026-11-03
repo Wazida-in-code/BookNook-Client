@@ -15,6 +15,7 @@ import { toast } from "../ui/toast";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const CATEGORIES = [
   "Mystery & Thriller",
@@ -36,6 +37,7 @@ interface IBook {
   description: string;
   userName: string;
   userEmail: string;
+  totalCopies: number;
 }
 
 const fieldClass =
@@ -53,8 +55,13 @@ const EditBook = ({book}:{book: IBook}) => {
 
   const handleSubmit = async (e: React.SubmitEvent<HTMLElement>) => {
     e.preventDefault();
+    const token = await getTokenFromClient()
     const formData = new FormData(e.target);
-    const bookData = Object.fromEntries(formData.entries());
+    const totalCopies = formData.get("totalCopies");
+    const bookData =  {
+  ...Object.fromEntries(formData.entries()),
+  totalCopies: Number(totalCopies),
+};
 
     const res = await fetch(
       `${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books/${book._id}`,
@@ -62,6 +69,7 @@ const EditBook = ({book}:{book: IBook}) => {
         method: "PATCH",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`
         },
         body: JSON.stringify(bookData),
       },
@@ -127,29 +135,48 @@ const EditBook = ({book}:{book: IBook}) => {
                 </div>
               </div>
 
-              <div className="space-y-1">
-                <Label htmlFor="category" className={labelClass}>
-                  Category
-                </Label>
-
-                <select
-                  id="category"
-                  name="category"
-                  defaultValue={book.category}
-                  className={`${fieldClass} h-9 w-full`}
-                  required
-                >
-                  <option value="" disabled>
-                    Select a category
-                  </option>
-
-                  {CATEGORIES.map((c) => (
-                    <option key={c} value={c.toLowerCase()}>
-                      {c}
-                    </option>
-                  ))}
-                </select>
-              </div>
+              <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+                            <div className="space-y-2">
+                              <Label htmlFor="category" className={labelClass}>
+                                Category
+                              </Label>
+              
+                              <select
+                                id="category"
+                                name="category"
+                                defaultValue={book.category}
+                                className={`${fieldClass} h-9 w-full`}
+                                required
+                              >
+                                <option value="" disabled>
+                                  Select a category
+                                </option>
+              
+                                {CATEGORIES.map((c) => (
+                                  <option key={c} value={c.toLowerCase()}>
+                                    {c}
+                                  </option>
+                                ))}
+                              </select>
+                            </div>
+              
+                            <div className="space-y-2">
+                              <Label htmlFor="totalCopies" className={labelClass}>
+                                Total Copies
+                              </Label>
+              
+                              <Input
+                                id="totalCopies"
+                                name="totalCopies"
+                                defaultValue={book.totalCopies}
+                                type="number"
+                                min="0"
+                                placeholder="Enter total copies"
+                                className={fieldClass}
+                                required
+                              />
+                            </div>
+                          </div>
 
               <div className="space-y-1">
                 <Label htmlFor="image-url" className={labelClass}>

@@ -1,5 +1,6 @@
 import ReturnBtn from '@/components/Borrow-Books/ReturnBtn';
 import { auth } from '@/lib/auth';
+import { getTokenFromServer } from '@/lib/getTokenFromServer';
 import { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Image from 'next/image';
@@ -24,11 +25,16 @@ export const metadata: Metadata = {
 };
 
 const MyBorrowsPage = async() => {
+  const token = await getTokenFromServer()
     const session = await auth.api.getSession({
         headers: await headers(),
       });
       const user = session?.user;
-      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/my-borrows/${user?.email}`)
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/my-borrows/${user?.email}`, {
+        headers: {
+          authorization: `Bearer ${token}`
+        },
+      })
       const borrows:Book[] = await res.json()
       console.log(borrows);
     return (

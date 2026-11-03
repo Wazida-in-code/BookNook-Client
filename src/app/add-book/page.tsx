@@ -4,7 +4,7 @@ import { Metadata } from "next";
 export const metadata: Metadata = {
   title: "Add-Book",
 };
-const AddBookPage = () => {
+const AddBookPage = async() => {
   
   return <AddBookForm />;
 };

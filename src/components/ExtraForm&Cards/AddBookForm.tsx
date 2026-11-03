@@ -11,18 +11,12 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
+
 import { Textarea } from "@/components/ui/textarea";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "@/components/ui/toast";
-import { redirect, useRouter } from "next/navigation";
-import { Metadata } from "next";
+import { redirect } from "next/navigation";
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 
 const CATEGORIES = [
   "Mystery & Thriller",
@@ -46,7 +40,9 @@ const AddBookForm = () => {
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const formData = new FormData(e.currentTarget);
+    const token = await getTokenFromClient()
+    const form = e.target as HTMLFormElement
+    const formData = new FormData(form);
     const totalCopies = formData.get("totalCopies");
     const bookData =  {
   ...Object.fromEntries(formData.entries()),
@@ -58,6 +54,7 @@ const AddBookForm = () => {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          authorization: `Bearer ${token}`
         },
         body: JSON.stringify(bookData),
       },

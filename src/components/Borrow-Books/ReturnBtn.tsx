@@ -1,4 +1,5 @@
 'use client'
+import { getTokenFromClient } from "@/lib/getTokenFromClient";
 import { toast } from "../ui/toast";
 import { useRouter } from "next/navigation";
 interface Book {
@@ -21,12 +22,15 @@ interface Book {
 const ReturnBtn = ({book}:{book: Book}) => {
     const router = useRouter()
     const handleReturn = async (id: string) => {
+      const token = await getTokenFromClient()
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/borrows/${id}`,
     {
       method: "PATCH",
-    }
-  );
+      headers: {
+          authorization: `Bearer ${token}`
+        },
+    });
 
   const data = await res.json();
 

@@ -1,8 +1,7 @@
 import Image from "next/image";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Button } from "@/components/ui/button";
-import { Trash2, UserRound } from "lucide-react";
+import { UserRound } from "lucide-react";
 import EditBook from "./EditBook";
 import DeleteBooks from "./DeleteBooks";
 
@@ -15,6 +14,7 @@ interface IBook {
   description: string;
   userName: string;
   userEmail: string;
+  totalCopies: number;
 }
 
 

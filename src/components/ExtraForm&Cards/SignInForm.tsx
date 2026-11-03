@@ -19,16 +19,19 @@ export default function SignInForm() {
     const formData = new FormData(e.currentTarget);
 
     const userData = Object.fromEntries(formData.entries()) as {email: string; password: string;}
-     const { data, error } = await signIn.email(userData);
+     const { data, error } = await signIn.email({
+      email: userData.email, 
+      password: userData.password, 
+      callbackURL: "/"
+     });
     
-        if (data) {
+        if (data?.token) {
             toast.add({
             title: "You Have Been Successfully Logged in!",
             type: "success"
         })
-          redirect("/")
-        }
-        router.refresh()
+      }
+
         if (error) {
            toast.add({
             title: "Something went wrong!",

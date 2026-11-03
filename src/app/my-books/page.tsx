@@ -1,5 +1,6 @@
 import MyBooksCard from "@/components/ExtraForm&Cards/MyBooksCard";
 import { auth } from "@/lib/auth";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 import { BookOpen } from "lucide-react";
 import { Metadata } from "next";
 import { headers } from "next/headers";
@@ -13,6 +14,7 @@ interface IBook {
   description: string;
   userName: string;
   userEmail: string;
+  totalCopies: number;
 }
 
 export const metadata: Metadata = {
@@ -23,8 +25,14 @@ const MyBooks = async () => {
   const session = await auth.api.getSession({
     headers: await headers(),
   });
+  const token = await getTokenFromServer()
   const user = session?.user;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/my-books/${user?.email}`,); //http://localhost:8000/my-books/omor@bin.com
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/my-books/${user?.email}`,{
+    headers: {
+          authorization: `Bearer ${token}`
+        },
+  }
+  ); //http://localhost:8000/my-books/omor@bin.com
   const books:IBook[] = await res.json();
 
   return (

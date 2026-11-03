@@ -6,6 +6,7 @@ import { UserRound, Mail, BookOpen } from "lucide-react";
 import { notFound } from "next/navigation";
 import BorrowBtn from "@/components/Borrow-Books/BorrowBtn";
 import { Metadata } from "next";
+import { getTokenFromServer } from "@/lib/getTokenFromServer";
 
 interface Book {
   _id: string;
@@ -25,7 +26,12 @@ export const metadata: Metadata = {
 
 const BookDetailsPage = async ({params}: {params: Promise<{ id: string }>}) => {
   const { id } = await params;
-  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books/${id}`);
+  const token = await getTokenFromServer()
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books/${id}`, {
+    headers : {
+      authorization: `Bearer ${token}`
+    }
+  });
   if (!res.ok) notFound()
   const data = await res.json();
   const book: Book = data.result ?? data;
