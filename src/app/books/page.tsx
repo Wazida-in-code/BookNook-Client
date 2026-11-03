@@ -1,4 +1,5 @@
 import AllBooksCard from "@/components/ExtraForm&Cards/AllBooksCard";
+import { Metadata } from "next";
 
 interface IBookAll {
   _id: string;
@@ -7,6 +8,10 @@ interface IBookAll {
   category: string;
   image: string;
 }
+
+export const metadata: Metadata = {
+  title: "All-Books",
+};
 
 const AllBooks = async () => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books`);

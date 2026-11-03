@@ -1,5 +1,6 @@
 import ReturnBtn from '@/components/Borrow-Books/ReturnBtn';
 import { auth } from '@/lib/auth';
+import { Metadata } from 'next';
 import { headers } from 'next/headers';
 import Image from 'next/image';
 interface Book {
@@ -17,6 +18,10 @@ interface Book {
   returnDate: string
   status: string;
 }
+
+export const metadata: Metadata = {
+  title: "My-Borrow",
+};
 
 const MyBorrowsPage = async() => {
     const session = await auth.api.getSession({

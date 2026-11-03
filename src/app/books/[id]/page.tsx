@@ -1,12 +1,11 @@
-
 import Image from "next/image";
-import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { UserRound, Mail, BookOpen } from "lucide-react";
 import { notFound } from "next/navigation";
 import BorrowBtn from "@/components/Borrow-Books/BorrowBtn";
+import { Metadata } from "next";
 
 interface Book {
   _id: string;
@@ -19,6 +18,10 @@ interface Book {
   userEmail: string;
   totalCopies: number;
 }
+
+export const metadata: Metadata = {
+  title: "Book-Details",
+};
 
 const BookDetailsPage = async ({params}: {params: Promise<{ id: string }>}) => {
   const { id } = await params;

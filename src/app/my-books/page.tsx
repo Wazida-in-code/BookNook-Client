@@ -1,6 +1,7 @@
 import MyBooksCard from "@/components/ExtraForm&Cards/MyBooksCard";
 import { auth } from "@/lib/auth";
 import { BookOpen } from "lucide-react";
+import { Metadata } from "next";
 import { headers } from "next/headers";
 
 interface IBook {
@@ -13,6 +14,10 @@ interface IBook {
   userName: string;
   userEmail: string;
 }
+
+export const metadata: Metadata = {
+  title: "My-Books",
+};
 
 const MyBooks = async () => {
   const session = await auth.api.getSession({
