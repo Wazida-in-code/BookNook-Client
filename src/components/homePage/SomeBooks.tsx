@@ -14,7 +14,7 @@ interface Book {
 }
 
 const SomeBooks = async() => {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/six-books`)
+    const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/six-books`, { cache: "no-store" })
     const data:Book[] = await res.json()
     console.log(data);
     return (
