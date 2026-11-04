@@ -34,6 +34,7 @@ const MyBorrowsPage = async() => {
         headers: {
           authorization: `Bearer ${token}`
         },
+        cache: "no-store"
       })
       const borrows:Book[] = await res.json()
       console.log(borrows);

@@ -30,7 +30,8 @@ const BookDetailsPage = async ({params}: {params: Promise<{ id: string }>}) => {
   const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_SERVER_URL}/books/${id}`, {
     headers : {
       authorization: `Bearer ${token}`
-    }
+    },
+     cache: "no-store" 
   });
   if (!res.ok) notFound()
   const data = await res.json();

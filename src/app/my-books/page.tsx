@@ -31,6 +31,7 @@ const MyBooks = async () => {
     headers: {
           authorization: `Bearer ${token}`
         },
+        cache: "no-store" 
   });
   const books:IBook[] = await res.json();
 

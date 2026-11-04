@@ -81,6 +81,7 @@ const EditBook = ({book}:{book: IBook}) => {
         title: "Book Updated Successfully!",
         type: "success",
       });
+    router.refresh()
     }
 
     if (!result) {
@@ -89,7 +90,6 @@ const EditBook = ({book}:{book: IBook}) => {
         type: "error",
       });
     }
-    router.refresh()
   };
     const handleClose = () => setIsOpen(false);
 
