@@ -105,7 +105,13 @@ From adding a new book to returning a borrowed one, BookNook brings a simple and
 
 ## 🖥️ Project Preview
 
-<!-- Add your project screenshots here -->
+<p align="center">
+  <img
+    src="./public/BookNook-Overview.png"
+    width="100%"
+    alt="BookNook Homepage Overview"
+  />
+</p>
 
 <p align="center">
   <i>More screenshots coming soon...</i>
@@ -120,8 +126,8 @@ Want to explore BookNook on your local machine? Follow these steps.
 ### 1. Clone the Repository
 
 ```bash
-git clone YOUR_CLIENT_REPOSITORY_URL
-cd your-project-folder
+git clone https://github.com/Wazida-in-code/BookNook-Client.git
+cd BookNook-Client
 ```
 
 ### 2. Install Dependencies
