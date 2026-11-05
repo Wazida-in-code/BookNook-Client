@@ -1,4 +1,5 @@
 import Banner from "@/components/homePage/Banner";
+import HowBorrowingWorks from "@/components/homePage/HowBorrowingWorks";
 import ReaderReviewsPage from "@/components/homePage/ReaderReviews";
 import SomeBooks from "@/components/homePage/SomeBooks";
 import TopCategories from "@/components/homePage/TopCategories";
@@ -14,6 +15,7 @@ export default function Home() {
       <Banner />
       <SomeBooks />
       <TopCategories />
+      <HowBorrowingWorks />
       <ReaderReviewsPage />
     </div>
   );
