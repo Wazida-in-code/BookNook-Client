@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { Mail, Phone, MapPin, BookOpen } from "lucide-react";
 import { FaFacebookF, FaInstagram, FaGithub } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
 
 const Footer = () => {
   return (
@@ -137,6 +138,16 @@ const Footer = () => {
                 className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ead9ca] transition hover:bg-[#783528] hover:text-white"
               >
                 <FaGithub size={16} />
+              </a>
+
+              <a
+                href="https://x.com"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="X"
+                className="flex h-9 w-9 items-center justify-center rounded-full border border-[#ead9ca] transition hover:bg-[#783528] hover:text-white"
+              >
+              <FaXTwitter size={16} />
               </a>
             </div>
           </div>

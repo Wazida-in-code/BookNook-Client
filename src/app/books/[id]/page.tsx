@@ -31,7 +31,7 @@ const BookDetailsPage = async ({params}: {params: Promise<{ id: string }>}) => {
     headers : {
       authorization: `Bearer ${token}`
     },
-     cache: "no-store" 
+    cache: "no-store" 
   });
   if (!res.ok) notFound()
   const data = await res.json();
